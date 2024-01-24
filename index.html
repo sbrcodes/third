@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Filterable Table</title>
+    <style>
+        /* Navbar styles */
+        .navbar {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            background-color: black;
+            align-items: center;
+            border-radius: 25px;
+            padding: 10px 20px;
+        }
+
+        .brand-title img {
+            border-radius: 25px;
+            padding-left: 5px;
+        }
+
+        .navbar li {
+            float: left;
+            list-style: none;
+            margin: 13px 20px;
+        }
+
+        .navbar ul {
+            overflow: auto;
+        }
+
+        .navbar li a {
+            padding: 3px 3px;
+            text-decoration: none;
+            color: white;
+        }
+
+        .navbar li a:hover {
+            background-color: grey;
+            border-radius: 20px;
+        }
+
+        .search {
+            float: right;
+            color: white;
+            padding: 12px 75px;
+        }
+
+        .navbar input {
+            border: 1px solid black;
+            border-radius: 20px;
+            padding: 3px 3px;
+        }
+
+        .navbar img {
+            padding-top: 10px;
+            float: left;
+        }
+
+        /* Table styles */
+        table {
+            display: none; /* Set initial display to none */
+            margin-top: 10px;
+            padding-top: 10px;
+            border-collapse: collapse;
+            text-align: center;
+            width: 100%;
+        }
+
+        th,
+        td {
+            padding: 8px;
+            border: 1px solid black;
+        }
+
+        .filter1 {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 5px;
+            margin-left: 5px;
+            margin-bottom: 5px;
+            margin-top: 5px;
+        }
+
+        .af {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        .b1{
+            display: flex;
+            width: 100%;
+            justify-content: center;
+        }
+        .applyFilterBtn{
+            margin-top:10px ;
+            justify-content: center;
+        }
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        /* Responsive design for the navbar */
+        @media only screen and (max-width: 600px) {
+            .navbar {
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+            }
+
+            .navbar ul {
+                margin-top: 10px;
+                /* Add margin for better spacing */
+                padding: 4px;
+                /* Remove default padding */
+            }
+
+            .navbar li {
+                margin: 5px 5px;
+                /* Adjust margin for better spacing */
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <!-- Navbar -->
+        <nav class="navbar">
+
+            <div class="brand-title">
+                <img src="bharat.png" alt="Brand Logo">
+            </div>
+            <ul class="navlinks">
+                <li><a href="#">HOME</a></li>
+                <li><a href="#">ABOUT</a></li>
+                <li><a href="#">SERVICES</a></li>
+                <li><a href="#">CONTACT US</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Filterable Table -->
+    <div class="filter1">
+        <div class="f1">
+            <label for="month">Month:</label>
+            <select id="month">
+                <option value="">All</option>
+                <option value="January">January</option>
+                <option value="February">February</option>
+                <option value="March">March</option>
+                <option value="April">April</option>
+                <option value="May">May</option>
+                <option value="June">June</option>
+                <option value="July">July</option>
+                <option value="August">August</option>
+                <option value="September">September</option>
+                <option value="October">October</option>
+                <option value="November">November</option>
+                <option value="December">December</option>
+
+
+
+            </select>
+        </div>
+        <div class="f2">
+            <label for="shift">Shift:</label>
+            <select id="shift">
+                <option value="">All</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+            </select>
+        </div>
+        <div class="f3">
+            <label for="priority">Priority:</label>
+            <select id="priority">
+                <option value="">All</option>
+                <option value="Urgent">Urgent</option>
+                <option value="moderate">Moderate</option>
+                <option value="Not urgent">Not Urgent</option>
+            </select>
+        </div>
+        <div class="f4">
+            <label for="city">City:</label>
+            <select id="city">
+                <option value="">All</option>
+                <option value="Delhi">Delhi</option>
+                <option value="Kolkata">Kolkata</option>
+                <option value="Las Vegas">Las Vegas</option>
+                <option value="New York">New York</option>
+            </select>
+        </div>
+        
+        <div class="b2">
+            <button id="additionalFiltersBtn" onclick="toggleAdditionalFilters()">Additional Filters</button>
+        </div>
+    </div>
+
+    
+    
+    <div id="additionalFilters" style="display:none;">
+        <div class="af">
+            
+
+            <div class="f5">
+                <label for="os">OS:</label>
+                <select id="os">
+                    <option value="">All</option>
+                    <option value="Mac">Mac</option>
+                    <option value="Windows">Windows</option>
+                    <option value="Linux">Linux</option>
+                </select>
+            </div>
+            <div class="f6">
+                <label for="salary">Salary:</label>
+                <select id="salary">
+                    <option value="">All</option>
+                    <option value="50000">50000</option>
+                    <option value="70000">70000</option>
+                    <option value="90000">90000</option>
+                </select>
+            </div>
+            <div class="f7">
+                <label for="holidays">Holidays:</label>
+                <select id="holidays">
+                    <option value="">All</option>
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </select>
+            </div>
+            
+        </div>
+      
+    </div>
+    <div class="b1">
+        <button class="applyFilterBtn" onclick="applyFilters()">Apply Filter</button>
+    </div>
+
+
+    <table id="dataTable">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Month</th>
+                <th>Shift</th>
+                <th>Priority</th>
+                <th>City</th>
+                <th>Phone Number</th>
+                <th>OS</th>
+                <th>Salary</th>
+                <th>Holidays</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Sample data goes here -->
+            <tr>
+                <td>John Doe</td>
+                <td>30</td>
+                <td>January</td>
+                <td>1</td>
+                <td>Urgent</td>
+                <td>Delhi</td>
+                <td>1234567890</td>
+                <td>Windows</td>
+                <td>70000</td>
+                <td>5</td>
+            </tr>
+            <!-- Additional Sample Data -->
+<tr>
+    <td>Alice Johnson</td>
+    <td>29</td>
+    <td>January</td>
+    <td>1</td>
+    <td>Moderate</td>
+    <td>Delhi</td>
+    <td>6543210987</td>
+    <td>Mac</td>
+    <td>90000</td>
+    <td>4</td>
+</tr>
+<tr>
+    <td>Bob Smith</td>
+    <td>33</td>
+    <td>February</td>
+    <td>2</td>
+    <td>Urgent</td>
+    <td>Kolkata</td>
+    <td>5432109876</td>
+    <td>Windows</td>
+    <td>70000</td>
+    <td>8</td>
+</tr>
+<tr>
+    <td>Grace Miller</td>
+    <td>28</td>
+    <td>March</td>
+    <td>1</td>
+    <td>Not Urgent</td>
+    <td>Las Vegas</td>
+    <td>4321098765</td>
+    <td>Linux</td>
+    <td>50000</td>
+    <td>6</td>
+</tr>
+<tr>
+    <td>David Wilson</td>
+    <td>30</td>
+    <td>April</td>
+    <td>2</td>
+    <td>Urgent</td>
+    <td>New York</td>
+    <td>3210987654</td>
+    <td>Mac</td>
+    <td>90000</td>
+    <td>2</td>
+</tr>
+<tr>
+    <td>Sophia Davis</td>
+    <td>34</td>
+    <td>May</td>
+    <td>1</td>
+    <td>Moderate</td>
+    <td>Delhi</td>
+    <td>2109876543</td>
+    <td>Windows</td>
+    <td>70000</td>
+    <td>9</td>
+</tr>
+<tr>
+    <td>James Brown</td>
+    <td>31</td>
+    <td>June</td>
+    <td>2</td>
+    <td>Not Urgent</td>
+    <td>Kolkata</td>
+    <td>1098765432</td>
+    <td>Linux</td>
+    <td>50000</td>
+    <td>5</td>
+</tr>
+<tr>
+    <td>Emma Wilson</td>
+    <td>27</td>
+    <td>July</td>
+    <td>1</td>
+    <td>Urgent</td>
+    <td>Las Vegas</td>
+    <td>9876543210</td>
+    <td>Windows</td>
+    <td>70000</td>
+    <td>3</td>
+</tr>
+<tr>
+    <td>Oliver Taylor</td>
+    <td>32</td>
+    <td>August</td>
+    <td>2</td>
+    <td>Moderate</td>
+    <td>New York</td>
+    <td>8765432109</td>
+    <td>Mac</td>
+    <td>90000</td>
+    <td>7</td>
+</tr>
+<tr>
+    <td>Ava Miller</td>
+    <td>29</td>
+    <td>September</td>
+    <td>1</td>
+    <td>Not Urgent</td>
+    <td>Delhi</td>
+    <td>7654321098</td>
+    <td>Linux</td>
+    <td>50000</td>
+    <td>1</td>
+</tr>
+<tr>
+    <td>Henry Johnson</td>
+    <td>35</td>
+    <td>October</td>
+    <td>2</td>
+    <td>Urgent</td>
+    <td>Kolkata</td>
+    <td>6543210987</td>
+    <td>Windows</td>
+    <td>70000</td>
+    <td>4</td>
+</tr>
+<!-- Add more sample data as needed -->
+
+
+            <!-- Add more sample data as needed -->
+            <!-- Add more sample data as needed -->
+        </tbody>
+    </table>
+
+    <script>
+        function applyFilters() {
+            var month = document.getElementById('month').value;
+            var shift = document.getElementById('shift').value;
+            var priority = document.getElementById('priority').value.toLowerCase();
+            var city = document.getElementById('city').value;
+            var os = document.getElementById('os').value;
+            var salary = document.getElementById('salary').value;
+            var holidays = document.getElementById('holidays').value;
+    
+            var table = document.getElementById('dataTable');
+            var rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+    
+            for (var i = 0; i < rows.length; i++) {
+                var row = rows[i];
+                var rowMonth = row.cells[2].innerText;
+                var rowShift = row.cells[3].innerText;
+                var rowPriority = row.cells[4].innerText.toLowerCase();
+                var rowCity = row.cells[5].innerText;
+                var rowOs = row.cells[7].innerText;
+                var rowSalary = row.cells[8].innerText;
+                var rowHolidays = row.cells[9].innerText;
+    
+                if ((month && rowMonth !== month) ||
+                    (shift && rowShift !== shift) ||
+                    (priority && rowPriority !== priority) ||
+                    (city && rowCity !== city) ||
+                    (os && rowOs !== os) ||
+                    (salary && rowSalary !== salary) ||
+                    (holidays && rowHolidays !== holidays)) {
+                    row.style.display = 'none';
+                } else {
+                    row.style.display = '';
+                }
+            }
+    
+            table.style.display = 'table';
+        }
+    
+        function toggleAdditionalFilters() {
+            var additionalFilters = document.getElementById('additionalFilters');
+            additionalFilters.style.display = additionalFilters.style.display === 'none' ? 'block' : 'none';
+        }
+    </script>
+    
+</body>
+
+</html>
